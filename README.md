@@ -1,59 +1,50 @@
-¼òµ¥ÓÃ·¨Ò»£º
-====
+njit8021xclient for iNode C0407
+===
+å””ï¼Œè¿™ä¸ªç‰ˆæœ¬ä¹Ÿæ”¯æŒinode 7.0ä¸­çš„ h3c-AES-MD5 ç®—æ³•
 
-	ÓÃwinscp½âÑ¹È«²¿ÎÄ¼şµ½rootÄ¿Â¼
+See ReadMe.html for more details...
 
-	Ö´ĞĞchmod +x run.sh
+Install
+---
+ä»…ä»¥debian/ubuntuä¸ºä¾‹ï¼š
 
-	Ö´ĞĞ
-	<code>./run.sh ÄãµÄÕËºÅ ÄãµÄÃÜÂë Íø¿¨ macµØÖ·</code>
-	£¨macµØÖ·¿ÉÊäÈë¿É²»Êä£¬¾ßÌå¿´ÄãÃÇÑ§Ğ£ÊÇ·ñ°ó¶¨mac£©
-	
-	¾ÙÀı
-	1.´ømac
-		./run.sh 12345678 abcba eth0.2 "AA:BB:CC:DD:EE:FF:GG"
-	2.²»´ømac
-		./run.sh 12345678 abcba eth0.2
+1. å®‰è£…ä¾èµ–åŠç¼–è¯‘å·¥å…·é“¾
+    `sudo apt-get install autoconf libtool libpcap-dev libssl-dev pkg-config`
+2. è®¿é—®ç½‘é¡µ https://github.com/bitdust/njit8021xclient/tree/master
+3. ç‚¹å‡»å³ä¾§ Download ZIP ä¸‹è½½æºç åŒ…
+4. è§£å‹åˆ°æŸä¸€ç›®å½•ï¼ˆå‡è®¾ä¸º `~/njit8021xclient-master`)
+5. è¿›å…¥ç›®å½•  `cd ~/njit8021xclient-master`
+6. è¿è¡Œ `autoreconf --install`
+7. è¿è¡Œ `./configure`
+8. è¿è¡Œ `make`
+9. è¿è¡Œ `sudo make install`
 
+å®Œæˆå®‰è£…ã€‚
 
-ÓÃ·¨¶ş£º
-====
-	¶ÔÓÚk2p,k2
-	ÓÃwinscp½âÑ¹È«²¿ÎÄ¼şµ½rootÄ¿Â¼
-	Ö´ĞĞchmod +x njit-client-mips
-	Ö´ĞĞ./njit-client-mips ÕËºÅ ÃÜÂë Íø¿¨
+Usage
+---
+1. è¿è¡Œ `sudo njit-client [ç”¨æˆ·å]  [å¯†ç ]  [ç½‘å¡å]` å³å¯ã€‚ï¼ˆåŸç‰ˆä½¿ç”¨æ–¹æ³•è¯´æ˜è¯·å‚ç…§README.htmlæ–‡ä»¶ï¼‰
+    æ³¨æ„ï¼šç½‘å¡åä¸ºè¿æ¥æ ¡å›­ç½‘çš„ç½‘å¡åï¼Œä¸€èˆ¬ä¸º eth0ï¼Œå…·ä½“è¯·ä½¿ç”¨ ifconfig æŸ¥æ‰¾ã€‚
+2. ç¨‹åºä¼šè¾“å‡ºä¸€äº›è°ƒè¯•ä¿¡æ¯ï¼Œå…¶ä¸­å¤§éƒ¨åˆ†ä¿¡æ¯ä¸ç”¨ç†ä¼šï¼Œ
+    åªéœ€å…³æ³¨å¦‚æœåŒ…æ‹¬`[*] Server: Success.`è¿™æ ·ä¸€è¡Œæç¤ºå³ä¸º802.1Xè®¤è¯æˆåŠŸã€‚
+3. å¦‚æœæ‹¨å·æ­£å¸¸ï¼Œä½†æ˜¯æ— æ³•ä¸Šç½‘ï¼Œè¯·å¦å¤–æ‰“å¼€ä¸€ä¸ªç»ˆç«¯ï¼Œè¿è¡Œ `dhclient [ç½‘å¡å]` æ‰‹åŠ¨è·å–IPåœ°å€ã€‚
+4. å®åœ¨æœ‰é—®é¢˜ï¼Œé‡å¯ä¸‹è¯•è¯•ã€‚
 
+Fork from
+---
+https://github.com/tengattack/8021xclient-for-windows
 
-##ÎÊÌâ·ÖÎö£º
-1.Èç¹û³öÏÖServer successµÈ×ÖÑÛ£¬ÄÇÃ´¹§Ï²Äã¿ÉÄÜ³É¹¦ÁË£¬µ«²»Ò»¶¨£¬ÉÏ¸öÍø¾ÍÖªµÀ
-2.Èç¹û³öÏÖmac ÂÒÂë£¬È¥Ç°¶Ë192.168.2.1£¨¾ßÌå¿´ÄãµÄÂ·ÓÉÆ÷£©¸Äwan¿ÚµÄmacµØÖ·£¬Èç¹ûÃ»µÄ¸Ä£¬¾ÍÓÃÒÔÏÂ·½·¨
+https://github.com/liuqun/njit8021xclient
 
-	ifconfig Íø¿¨ down
-	ifconfig Íø¿¨ hw ether macµØÖ·
-	ifconfig Íø¿¨ up
-##macµØÖ·²é¿´·½·¨£¬window°´win+r ÊäÈëcmd½øÈë¿ØÖÆÌ¨£¬ÊäÈëipconfig /all
-ÕÒµ½ÒÔÌ«Íø¶ÔÓ¦µÄÎïÀíµØÖ·
-»òÕßÈ¥windowµÄinode¿Í»§¶ËÕÒ¡ª¡ª¡ª¡ª>ÉèÖÃ-->INCs--> Ethernet ¶ÔÓ¦µÄ Mac address
+Depends on
+---
+[libssl](https://wiki.openssl.org/)
 
+[libpcap](http://www.tcpdump.org/)
 
+More info
+---
+[å—äº¬å·¥ç¨‹å­¦é™¢ - æ ¡å›­ç½‘802.1Xå®¢æˆ·ç«¯ - é¡¹ç›®æ–‡æ¡£](./documents/Documents.html)
 
+[å…³äºinode7.0ä¸­åŸºäºAES128çš„éªŒè¯ç®—æ³•](./documents/h3c_AES_MD5.md)
 
-##ÔõÃ´¿´Íø¿¨£¿
-ÊäÈëipconfig,×îºóÒ»¸ö ´øethµÄÒ»°ã¾ÍÊÇÂ·ÓÉÆ÷wan¿ÚµÄÍø¿¨
-####±ÈÈçÊäÈëipconfig¼ÙÈç³öÏÖ
-
-<code>
-lo :
-	blalbalk
-
-eth0:
-	blalbala
-eth1
-	balabala
-
-eth0.2
-	blalbala
-ens
-	blabala
-</code>
-ÄÇÃ´ÕâÀïÃæµÄeth0.2¿ÉÄÜ¾ÍÊÇÄãµÄÒÔÌ«ÍøÍø¿¨
