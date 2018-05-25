@@ -36,7 +36,7 @@ fi
 if [[ -n $MACADDRESS ]]
 then
   ifconfig $ADAPTER down
-  ifconfig $ADAPTER hw $MACADDRESS
+  ifconfig $ADAPTER hw ether $MACADDRESS
   ifconfig $ADAPTER up
 else 
   echo you did\'n input MACADDRESS
