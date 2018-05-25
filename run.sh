@@ -54,7 +54,7 @@ fi
     echo unknow arch
     exit 2
   fi
-
 #==========ping================================
+./reset.sh $ACCOUNT $PASSWORD $ADAPTER
 echo "Now you can open  browser to check if the network is available"
 

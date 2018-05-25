@@ -6,8 +6,11 @@ do
 	if test $a -eq 1
 	then
 		killall njit-client-mips
-		/root/njit-client-mips $1 $2 $3 &
+		./njit-client-mips $1 $2 $3 &
 	fi
 	sleep 20
 done
+# $1 is your account
+# $2 is your password
+# $3 is your adapter
 
