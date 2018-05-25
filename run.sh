@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 FIRST=$1
 if [[ $FIRST == "-h"  ||  $FIRST == "--help" ]] 
 then
