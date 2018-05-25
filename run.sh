@@ -1,6 +1,6 @@
 #!/bin/sh
 FIRST=$1
-if [[ $FIRST == "-h"  ||  $FIRST == "--help" ]] 
+if [ $FIRST == "-h" ]  || [ $FIRST == "--help" ]
 then
   echo "================================help====================="
   echo ""Adapter maybe is in the last line
@@ -45,16 +45,16 @@ fi
   if [[ `uname -m` == "mips" ]]
   then
     echo mips
-    ./njit-client-mips $ACCOUNT $PASSWORD $ADAPTER &
+    /root/njit-client-mips $ACCOUNT $PASSWORD $ADAPTER &
   elif [[ `uname -m` == "mipsel" ]]
   then
     echo mipsel
-    ./njit-client-mipsel $ACCOUNT $PASSWORD $ADAPTER &
+    /root/njit-client-mipsel $ACCOUNT $PASSWORD $ADAPTER &
   else
     echo unknow arch
     exit 2
   fi
 #==========ping================================
-./reset.sh $ACCOUNT $PASSWORD $ADAPTER
+/root/reset.sh $ACCOUNT $PASSWORD $ADAPTER
 echo "Now you can open  browser to check if the network is available"
 

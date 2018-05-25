@@ -6,7 +6,7 @@ do
 	if test $a -eq 1
 	then
 		killall njit-client-mips
-		./njit-client-mips $1 $2 $3 &
+		/root/njit-client-mips $1 $2 $3 &
 	fi
 	sleep 20
 done
