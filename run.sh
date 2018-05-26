@@ -22,18 +22,20 @@ ACCOUNT=$1
 PASSWORD=$2
 ADAPTER=$3
 MACADDRESS=$4
-chmod +x njit-client-*
 
-if  [[ -z $ACCOUNT  ||  -z $PASSWORD  ||  -z $ADAPTER ]]
+if  [ -z $ACCOUNT ] || [ -z $PASSWORD ] || [ -z $ADAPTER ]
 then
   exit 1
-elif [[ ! `ifconfig | grep $ADAPTER` ]]
+elif [ ! `ifconfig | grep $ADAPTER` ]
 then
   echo  $ADAPTER not found
+  exit 3
 fi
+chmod +x /root/njit-client-*
+chmod +x /root/reset.sh
 
 #============change==mac addr===================
-if [[ -n $MACADDRESS ]]
+if [ -n $MACADDRESS ]
 then
   ifconfig $ADAPTER down
   ifconfig $ADAPTER hw ether $MACADDRESS
@@ -42,19 +44,32 @@ else
   echo you did\'n input MACADDRESS
 fi
 #==============test arch and run=================
-  if [[ `uname -m` == "mips" ]]
+set MY_ARCH
+  if [ `uname -m` == "mips" ]
   then
-    echo mips
-    /root/njit-client-mips $ACCOUNT $PASSWORD $ADAPTER &
-  elif [[ `uname -m` == "mipsel" ]]
+    MY_ARCH=mips
+  elif [ `uname -m` == "mipsel" ]
   then
-    echo mipsel
-    /root/njit-client-mipsel $ACCOUNT $PASSWORD $ADAPTER &
+    MY_ARCH=mipsel
   else
-    echo unknow arch
-    exit 2
+    echo "\n\nunknow arch, this script may not support your device\n\n"
+    exit 5
   fi
 #==========ping================================
-/root/reset.sh $ACCOUNT $PASSWORD $ADAPTER
 echo "Now you can open  browser to check if the network is available"
+#=========test network======================
+while true
+do
+	ping -c 2 114.114.114.114
+	a=$?
+	if test $a -eq 1
+	then
+		killall njit-client-$MY_ARCH
+		/root/njit-client-$MY_ARCH $ACCOUNT $PASSWORD $ADAPTER &
+	fi
+	sleep 20
+done
+# $1 is your account
+# $2 is your password
+# $3 is your adapter
 
