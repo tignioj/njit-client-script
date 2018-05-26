@@ -30,8 +30,7 @@ then
   echo  $ADAPTER not found
   exit 3
 fi
-chmod +x /root/njit-client-*
-chmod +x /root/reset.sh
+chmod +x /root/njit-client
 
 #============change==mac addr===================
 if [ -n $MACADDRESS ]
@@ -43,17 +42,6 @@ else
   echo you did\'n input MACADDRESS
 fi
 #==============test arch and run=================
-set MY_ARCH
-  if [ `uname -m` = "mips" ]
-  then
-    MY_ARCH=mips
-  elif [ `uname -m` = "mipsel" ]
-  then
-    MY_ARCH=mipsel
-  else
-    echo "\n\nunknow arch, this script may not support your device\n\n"
-    exit 5
-  fi
 #==========ping================================
 echo "Now you can open  browser to check if the network is available"
 #=========test network======================
@@ -63,8 +51,8 @@ do
 	a=$?
 	if test $a -eq 1
 	then
-		killall njit-client-$MY_ARCH
-		/root/njit-client-$MY_ARCH $ACCOUNT $PASSWORD $ADAPTER &
+		killall njit-client
+		/root/njit-client $ACCOUNT $PASSWORD $ADAPTER &
 	fi
 	sleep 20
 done
