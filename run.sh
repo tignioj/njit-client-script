@@ -1,6 +1,6 @@
 #!/bin/sh
 FIRST=$1
-if [ $FIRST == "-h" ]  || [ $FIRST == "--help" ]
+if [ $FIRST = "-h" -o  $FIRST = "--help" ]
 then
   echo "================================help====================="
   echo ""Adapter maybe is in the last line
@@ -9,14 +9,13 @@ then
   echo "./run 12345678 abcabc eth0.2 AA:BB:CC:DD:EE:FF"
   exit
 fi
-cat /etc/config/network | grep "eth"
-ifconfig | grep "eth"
+ADAPTER=`ifconfig | grep eth | awk '{print $1}' | tail -1`
 echo -e "\n\n\n===========Usage================\n\n\n"
 echo -e "./run ACCOUNT PASSWORD ADAPTER MACADDRESS\n\n\n"
 echo "For example:"
 echo -e "\n./run 12345678 abcabc eth0.2 AA:BB:CC:DD:EE:FF\n"
 echo "=============Tips: ==========="
-echo ""Adapter maybe in the last line
+echo "Adapter maybe $ADAPTER"
 echo "Mac address:(example AA:BB:CC:DD:EE:FF)" 
 ACCOUNT=$1
 PASSWORD=$2
@@ -45,10 +44,10 @@ else
 fi
 #==============test arch and run=================
 set MY_ARCH
-  if [ `uname -m` == "mips" ]
+  if [ `uname -m` = "mips" ]
   then
     MY_ARCH=mips
-  elif [ `uname -m` == "mipsel" ]
+  elif [ `uname -m` = "mipsel" ]
   then
     MY_ARCH=mipsel
   else
