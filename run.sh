@@ -1,4 +1,9 @@
 #!/bin/sh
+ACCOUNT=$1
+PASSWORD=$2
+ADAPTER=$3
+MACADDRESS=$4
+#==============help==================
 FIRST=$1
 if [ $FIRST = "-h" -o  $FIRST = "--help" ]
 then
@@ -9,6 +14,17 @@ then
   echo "./run 12345678 abcabc eth0.2 AA:BB:CC:DD:EE:FF"
   exit
 fi
+#=============startup================
+cat << EOF > /etc/init.d/startinode.sh
+#!/bin/sh /etc/rc.common
+START=75
+start(){
+  /root/run.sh $ACCOUNT $PASSWORD $ADAPTER
+}
+EOF
+chmod +x /etc/init.d/startinode.sh
+ln -s /etc/init.d/startinode /etc/rc.d/S75startinod.sh
+#===============Tips====================
 ADAPTER=`ifconfig | grep eth | awk '{print $1}' | tail -1`
 echo -e "\n\n\n===========Usage================\n\n\n"
 echo -e "./run ACCOUNT PASSWORD ADAPTER MACADDRESS\n\n\n"
@@ -17,11 +33,7 @@ echo -e "\n./run 12345678 abcabc eth0.2 AA:BB:CC:DD:EE:FF\n"
 echo "=============Tips: ==========="
 echo "Adapter maybe $ADAPTER"
 echo "Mac address:(example AA:BB:CC:DD:EE:FF)" 
-ACCOUNT=$1
-PASSWORD=$2
-ADAPTER=$3
-MACADDRESS=$4
-
+#==============arg-test==============
 if  [ -z $ACCOUNT ] || [ -z $PASSWORD ] || [ -z $ADAPTER ]
 then
   exit 1
@@ -39,12 +51,10 @@ then
   ifconfig $ADAPTER hw ether $MACADDRESS
   ifconfig $ADAPTER up
 else 
-  echo you did\'n input MACADDRESS
+  echo you didn\'t input MACADDRESS
 fi
 #==============test arch and run=================
-#==========ping================================
 echo "Now you can open  browser to check if the network is available"
-#=========test network======================
 while true
 do
 	ping -c 2 114.114.114.114
