@@ -19,11 +19,12 @@ cat << EOF > /etc/init.d/startinode.sh
 #!/bin/sh /etc/rc.common
 START=75
 start(){
-  /root/run.sh $ACCOUNT $PASSWORD $ADAPTER
+  echo hello > /root/hello
+  /root/run.sh $ACCOUNT $PASSWORD $ADAPTER $MACADDRESS
 }
 EOF
 chmod +x /etc/init.d/startinode.sh
-ln -s /etc/init.d/startinode /etc/rc.d/S75startinod.sh
+ln -s /etc/init.d/startinode.sh /etc/rc.d/S75startinode.sh
 #===============Tips====================
 ADAPTER=`ifconfig | grep eth | awk '{print $1}' | tail -1`
 echo -e "\n\n\n===========Usage================\n\n\n"
@@ -62,7 +63,7 @@ do
 	if test $a -eq 1
 	then
 		killall njit-client
-		/root/njit-client $ACCOUNT $PASSWORD $ADAPTER &
+		/root/njit-client $ACCOUNT $PASSWORD ${ADAPTER}
 	fi
 	sleep 20
 done
